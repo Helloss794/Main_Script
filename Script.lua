@@ -28,7 +28,7 @@ Window:Notify({
 })
 
 local Info = Window:Tab({Title = "Information", Icon = "info"}) do
-	Info:Section({Title = "Nothing have in This Tab For Update!"})
+	Info:Section({Title = "Key expires in: 00:00:00"})
 end
 
 local Tab = Window:Tab({Title = "Main", Icon = "star"}) do
