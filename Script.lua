@@ -27,8 +27,12 @@ Window:Notify({
     Time = 4
 })
 
+local Info = Window:Tab({Title = "Information", Icon = "info"}) do
+	Info:Section({Title = "Nothing have in This Tab For Update!"})
+end
+
 local Tab = Window:Tab({Title = "Main", Icon = "star"}) do
-    Tab:Section({Title = "All UI Components"})
+    Tab:Section({Title = "Local Player Components"})
 
     local CustomSpeed = 26
     local DefaultSpeed = 16
@@ -190,3 +194,5 @@ local Tab = Window:Tab({Title = "Auto Main", Icon = "star"}) do
         end
     })
 end
+
+-- fixed
