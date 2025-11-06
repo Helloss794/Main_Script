@@ -1,4 +1,4 @@
-Library = {}
+Library = {};
 SaveTheme = {}
 
 local themes = {
