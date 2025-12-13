@@ -1,27 +1,29 @@
-name: Auto Generate Key
+name: Auto Generate Key (30s)
 
 on:
-  schedule:
-    - cron: "0 0 */2 * *"   # every 48 hours
   workflow_dispatch:
 
 jobs:
   generate-key:
     runs-on: ubuntu-latest
+    timeout-minutes: 360  # max 6 hours per run
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Generate key
-        run: |
-          KEY=$(uuidgen)
-          echo "$KEY" > key.txt
-
-      - name: Commit key
+      - name: Generate key every 30 seconds
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add key.txt
-          git commit -m "Auto-generated key"
-          git push
+
+          while true; do
+            KEY=$(uuidgen)
+            echo "$KEY" > key.txt
+
+            git add key.txt
+            git commit -m "Auto-generated key (30s)" || echo "No changes"
+            git push
+
+            sleep 30
+          done
