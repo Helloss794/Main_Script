@@ -1,0 +1,27 @@
+name: Auto Generate Key
+
+on:
+  schedule:
+    - cron: "0 0 */2 * *"   # every 48 hours
+  workflow_dispatch:
+
+jobs:
+  generate-key:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Generate key
+        run: |
+          KEY=$(uuidgen)
+          echo "$KEY" > key.txt
+
+      - name: Commit key
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add key.txt
+          git commit -m "Auto-generated key"
+          git push
